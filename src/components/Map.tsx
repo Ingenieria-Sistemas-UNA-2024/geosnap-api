@@ -11,6 +11,11 @@ const center = {
   lng: -83.69172815398791,
 };
 
+const other = {
+    lat:  9.38631621875457,
+    lng: -83.70001588351072,
+  };
+
 const Map = () => {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: 'AIzaSyD_cXy0RgcLC5VAjc1iAgVCfIjW0YLU_KM'
@@ -32,6 +37,7 @@ const Map = () => {
         center={center}
       >
         <Marker position={center} />
+        <Marker position={other} />
       </GoogleMap>
     </div>
   );
