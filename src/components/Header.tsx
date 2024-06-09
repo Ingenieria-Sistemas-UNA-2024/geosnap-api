@@ -1,17 +1,27 @@
-import React from 'react';
+/**
+ * v0 by Vercel.
+ * @see https://v0.dev/t/nbJGWjpH0Fw
+ * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
+ */
+import { Button } from "@/components/ui/button"
 
-const Header: React.FC = () => {
+export default function Component() {
   return (
-    <header className="bg-gray-900 text-white py-8">
-      <div className="container mx-auto px-4">
-        <h1 className="text-4xl font-bold mb-4">Geo-Snap</h1>
-        <p className="text-lg mb-8">Captura momentos inolvidables con nuestra aplicación de geolocalización.</p>
-        <button className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded">
-          Utilizar Geo-Snap
-        </button>
+    <header className="w-full bg-[#30363d] py-6 px-6 md:px-8 lg:px-10">
+      <div className="container mx-auto flex flex-col items-center justify-between sm:flex-row">
+        <div className="flex flex-col items-center">
+          <h1 className="text-4xl font-bold text-[#693CA5]">Geo-Snap</h1>
+          <span className="text-white font-medium text-lg">
+            Captura momentos inolvidables.
+          </span>
+        </div>
+        <Button
+          variant="default"
+          className="bg-[#693CA5] text-white hover:bg-[#5a3088] focus:outline-none focus:ring-2 focus:ring-[#693CA5] focus:ring-opacity-50 mt-4 sm:mt-0 px-6 py-3"
+        >
+          Empezar
+        </Button>
       </div>
     </header>
-  );
-};
-
-export default Header;
+  )
+}
