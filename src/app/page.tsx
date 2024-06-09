@@ -2,7 +2,7 @@
 import { ChangeEvent, useState } from "react";
 import Image from "next/image";
 import { sendFileToDestination,getImageFromDestination } from "./hooks/hookSaveImage";
-
+import Header from "@/components/Header";
 export default function Home() {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   let [imageConsulted, setImageConsulted] = useState<File | null>(null);
@@ -40,7 +40,8 @@ export default function Home() {
   };
 
   return (
-    <main className="flex flex-col items-center justify-center h-screen bg-[#202020] text-white">
+    <>
+    <Header/>
       <div className="flex flex-col items-center justify-center">
         <h1 className=" text-3xl font-bold mb-4">GeoSnap</h1>
         <input
@@ -93,6 +94,6 @@ export default function Home() {
           Consultar Imagen
         </button>
       </div>
-    </main>
+      </>
   );
 }
