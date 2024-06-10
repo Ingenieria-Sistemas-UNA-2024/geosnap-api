@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api"
 import getPhotos from "@/lib/getPhotos"
-import { Photo } from "@/types/type"
+import { Photo } from "@/types/types"
 import useGeolocation from "@/hooks/useGeolocation"
 
 const mapContainerStyle = {
