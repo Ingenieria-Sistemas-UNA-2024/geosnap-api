@@ -1,24 +1,29 @@
-import React from 'react';
-import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
-
+import React, { useEffect, useState } from "react";
+import { GoogleMap, useLoadScript, Marker, InfoWindow } from "@react-google-maps/api";
+import getPhotos from "@/lib/getPhotos";
+import { Photo } from "@/types/type";
+import useGeolocation from "@/hooks/useGeolocation";
 
 const mapContainerStyle = {
-  width: '100vw',
-  height: '100vh',
+  width: "100vw",
+  height: "100vh",
 };
-const center = {
-  lat: 9.380168965718807,
-  lng: -83.69172815398791,
-};
-
-const other = {
-    lat:  9.38631621875457,
-    lng: -83.70001588351072,
-  };
 
 const Map = () => {
+  const [photos, setPhotos] = useState<Photo[]>([]);
+  const { coordinates } = useGeolocation();
+  const [selectedPhoto, setSelectedPhoto] = useState<Photo | null>(null);
+
+  useEffect(() => {
+    const fetchPhotos = async () => {
+      const recentPhotos = await getPhotos();
+      setPhotos(recentPhotos);
+    };
+    fetchPhotos();
+  }, []);
+
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: 'AIzaSyD_cXy0RgcLC5VAjc1iAgVCfIjW0YLU_KM'
+    googleMapsApiKey: "AIzaSyD_cXy0RgcLC5VAjc1iAgVCfIjW0YLU_KM",
   });
 
   if (loadError) {
@@ -33,11 +38,31 @@ const Map = () => {
     <div>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
-        zoom={10}
-        center={center}
+        zoom={15}
+        center={{
+          lat: coordinates.latitude ?? 9.380168965718807,
+          lng: coordinates.longitude ?? -83.69172815398791,
+        }}
       >
-        <Marker position={center} />
-        <Marker position={other} />
+        {photos.map((photo) => (
+          <Marker
+            key={photo.photoID}
+            position={{
+              lat: parseFloat(photo.latitude),
+              lng: parseFloat(photo.longitude),
+            }}
+            onClick={() => setSelectedPhoto(photo)}
+          >
+            {selectedPhoto && selectedPhoto.photoID === photo.photoID && (
+              <InfoWindow>
+                <div>
+                  <img src={photo.photoURL} alt="Photo" style={{ maxWidth: "200px" }} />
+                  <p>Likes: {photo.likes}</p>
+                </div>
+              </InfoWindow>
+            )}
+          </Marker>
+        ))}
       </GoogleMap>
     </div>
   );
