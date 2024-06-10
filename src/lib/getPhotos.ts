@@ -1,4 +1,4 @@
-import { Photo } from "@/types/type"
+import { Photo } from "@/types/types"
 
 const getPhotos = async (): Promise<Photo[]> => {
   try {

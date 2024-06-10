@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { GoogleMap, useLoadScript, Marker, InfoWindow } from "@react-google-maps/api";
-import getPhotos from "@/lib/getPhotos";
-import { Photo } from "@/types/type";
-import useGeolocation from "@/hooks/useGeolocation";
+
+import React, { useEffect, useState } from "react"
+import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api"
+import getPhotos from "@/lib/getPhotos"
+import { Photo } from "@/types/types"
+import useGeolocation from "@/hooks/useGeolocation"
 
 const mapContainerStyle = {
   width: "100vw",
